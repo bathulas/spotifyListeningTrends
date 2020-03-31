@@ -25,10 +25,8 @@ while len(response["items"]) > 0:
     total.append(response)
     response = get("https://api.spotify.com/v1/me/tracks", offset, limit)
 # Get audio features of favorite tracks
-track_ids = [[(track['added_at'],track['track']['href']) for track in x['items']]   for x in total]
-id_strings = []
-for track_li in track_ids:
-    id_strings.append("%2C".join([x[1].split('tracks/')[1] for x in track_li]))
+track_ids = [[(track['added_at'],track['track']['id']) for track in x['items']]   for x in total]
+id_strings = ["%2C".join([x[1] for x in id_list_]) for id_list_ in track_ids]
 counter= 0
 track_features_ = []
 while (counter+1) < len(id_strings):
@@ -36,4 +34,3 @@ while (counter+1) < len(id_strings):
     time.sleep(0.6)
     resp = get("https://api.spotify.com/v1/audio-features?ids=" + id_strings[counter],0,0)
     track_features_.append(resp)
-
