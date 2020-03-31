@@ -11,4 +11,4 @@ Project is to organize and analyze my favorite tracks better than spotify using 
    'liveness',
    'valence',
    'tempo'.
-   
+   All the metrics are provided by Spotify API.
